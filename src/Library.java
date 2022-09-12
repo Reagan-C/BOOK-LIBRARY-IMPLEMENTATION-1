@@ -1,16 +1,18 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Library {
    private String name;
    private String address;
 
-   private String nameOfLibrarian;
-   private ArrayList<Book> books;
+   private static Librarian librarian;
+   public static Map<String, Book> books ;
 
     public Library(String name, String address) {
         this.name = name;
         this.address = address;
-        this.books = new ArrayList<>();
+        this.books = new HashMap<>();
     }
 
     public String getName() {
@@ -26,23 +28,32 @@ public class Library {
     }
 
     public String getNameOfLibrarian() {
-        return nameOfLibrarian;
+        return librarian.getName();
     }
 
-    public ArrayList<Book> getBooks() {
+    public static void setBooks(Map<String, Book> books, Librarian obj) {
+        if (obj.getName().equalsIgnoreCase(librarian.getName())) {
+            Library.books = books;
+        }
+    }
+
+    public static Map<String, Book> getBooks() {
         return books;
     }
 
-    public void setNameOfLibrarian(String nameOfLibrarian) {
-        this.nameOfLibrarian = nameOfLibrarian;
+    public void setLibrarian(Librarian librarian) {
+        this.librarian = librarian;
     }
 
+    public void removeLibrarian(Librarian librarian) {
+        this.librarian = null;
+    }
     @Override
     public String toString() {
         return "Library{" +
                 "Name='" + name + '\'' +
                 ", Address='" + address + '\'' +
-                ", Name of Librarian='" + nameOfLibrarian + '\'' +
+                ", Name of Librarian='" + librarian + '\'' +
                 ", Books=" + books +
                 '}';
     }

@@ -27,14 +27,20 @@ public  class LibraryUtils<T> {
     }
 
     public static final boolean addUserToQueue(final AbstractUserEntity user, final Book book) {
-        if (book == null) {
+        if (book == null || (!availableBooks.containsKey(book.getName()))) {
             System.out.println("Invalid book type");
+            return false;
         }
         if (user instanceof Librarian) {
             System.out.println("Only teachers and students are allowed to borrow books");
+            return false;
         }
         if (waitingQueue.contains(user) || borrowerList.containsKey(user)){
             System.out.println( "Dear " + user.getName() + ", You can only borrow one book at a time");
+            return false;
+        }
+        if (book.getNoOfCopies() < 1) {
+            System.out.println("Book taken");
             return false;
         }
 
@@ -45,7 +51,7 @@ public  class LibraryUtils<T> {
 
     public static <T>void returnBook(T user, Book book) {
         if (book == null ||user instanceof Librarian ) {
-            System.out.println("Enter type no allowed, please recheck");
+            System.out.println("Invalid entry type, please recheck");
         }
 
         if (borrowerList.containsKey(user) && borrowerList.containsValue(book.getName())) {

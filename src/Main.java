@@ -58,6 +58,11 @@ public class Main{
 
         System.out.println("Attempting to borrow another book after returning the borrowed one");
         LibraryUtils.addUserToQueue(teacher1,book3);
+
+        Book book4 = new Book("A midsummer night's dream",1979,"London Press",0,"William Shakespeare");
+        LibraryUtils.addBook(book4,librarian);
+//        LibraryUtils.addUserToQueue(teacher2,book4);
+//        System.out.println(LibraryUtils.availableBooks.toString());
     }
 
 }
